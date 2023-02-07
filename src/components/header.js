@@ -21,11 +21,11 @@ export default Header;
 const { text, link } = theme;
 
 const Container = styled.div`
-  position: fixed;
-  top: 0;
+
   padding: 50px;
   border-bottom: 1px solid ${text};
   display: flex;
+  justify-content: center;
 `;
 
 const HeaderOdd = styled.div`

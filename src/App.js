@@ -29,18 +29,18 @@ const Container = styled.div`
   font-family: roboto;
   width: 100vw;
   height: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background: ${background};
   color: ${text};
   /* background: black;
   color: white; */
-`;
+  `;
 
 const Body = styled.div`
   font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   /* font-weight: 100; */
 `;
 

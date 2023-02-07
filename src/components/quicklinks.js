@@ -78,6 +78,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   /* width: 40vw; */
+  width: 80vw;
   margin-bottom: 20px;
 `;
 
