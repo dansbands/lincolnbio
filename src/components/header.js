@@ -21,7 +21,6 @@ export default Header;
 const { text, link } = theme;
 
 const Container = styled.div`
-
   padding: 50px;
   border-bottom: 1px solid ${text};
   display: flex;
