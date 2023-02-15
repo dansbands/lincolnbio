@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faInstagram,
+  faSquareInstagram,
   faFacebook,
   faYoutube,
   faItunes,
@@ -14,8 +14,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import theme from "./theme";
 import SectionHeading from "./section-heading";
+import { breakpoint } from "../util/device";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 
 const QuickLinks = () => {
+  const isMobile = useMediaQuery();
+  const iconSize = isMobile ? "3x" : "6x";
+
   return (
     <Container>
       <QuickLinksLeft>
@@ -26,19 +31,19 @@ const QuickLinks = () => {
         <HorizontalLinks>
           <Link href="http://www.instagram.com/dansbands">
             <LinkContent>
-              <FontAwesomeIcon icon={faInstagram} size="6x" />
+              <FontAwesomeIcon icon={faSquareInstagram} size={iconSize} />
               <div>Instagram</div>
             </LinkContent>
           </Link>
           <Link href="http://www.facebook.com/danodeamusic">
             <LinkContent>
-              <FontAwesomeIcon icon={faFacebook} size="6x" />
+              <FontAwesomeIcon icon={faFacebook} size={iconSize} />
               <div>Facebook</div>
             </LinkContent>
           </Link>
           <Link href="http://www.youtube.com/dansbands">
             <LinkContent>
-              <FontAwesomeIcon icon={faYoutube} size="6x" />
+              <FontAwesomeIcon icon={faYoutube} size={iconSize} />
               <div>YouTube</div>
             </LinkContent>
           </Link>
@@ -52,13 +57,13 @@ const QuickLinks = () => {
         <HorizontalLinks>
           <Link href="https://music.apple.com/us/artist/dan-odea/410221391">
             <LinkContent>
-              <FontAwesomeIcon icon={faItunes} size="6x" />
+              <FontAwesomeIcon icon={faItunes} size={iconSize} />
               <div>Apple Music</div>
             </LinkContent>
           </Link>
           <Link href="https://open.spotify.com/artist/748sWPyuNgpL0ojyVQ5ziM">
             <LinkContent>
-              <FontAwesomeIcon icon={faSpotify} size="6x" />
+              <FontAwesomeIcon icon={faSpotify} size={iconSize} />
               <div>Spotify</div>
             </LinkContent>
           </Link>
@@ -73,18 +78,17 @@ export default QuickLinks;
 const { text, link } = theme;
 
 const Container = styled.div`
-  /* border: 1px solid ${text}; */
-  /* padding: 20px; */
   display: flex;
   flex-direction: row;
-  /* width: 40vw; */
-  width: 80vw;
+  width: 90vw;
   margin-bottom: 20px;
+
+  ${breakpoint("tablet")} {
+    width: 80vw;
+  }
 `;
 
 const QuickLinksLeft = styled.div`
-  /* border: 1px solid ${text}; */
-  /* padding: 20px; */
   display: flex;
   flex-direction: column;
   width: 55%;
@@ -92,14 +96,11 @@ const QuickLinksLeft = styled.div`
 `;
 
 const QuickLinksRight = styled.div`
-  /* border: 1px solid ${text}; */
-  /* padding: 20px; */
   margin-left: 10%;
   display: flex;
   flex-direction: column;
   flex-basis: 2;
   width: 35%;
-  /* width: 30vw; */
 `;
 
 const HorizontalLinks = styled.div`
@@ -113,11 +114,20 @@ const Link = styled.a`
 `;
 
 const LinkContent = styled.div`
-  border: 3px solid ${link};
+  border: 1px solid ${link};
   border-radius: 10px;
-  padding: 10px;
+  padding: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 110px;
+  min-width: 40px;
+  font-size: 8px;
+  justify-content: center;
+  text-align: center;
+
+  ${breakpoint("tablet")} {
+    min-width: 110px;
+    font-size: 16px;
+    padding: 10px;
+  }
 `;

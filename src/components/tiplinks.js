@@ -6,6 +6,7 @@ import venmo from "../assets/venmo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaypal } from "@fortawesome/free-brands-svg-icons";
 import SectionHeading from "./section-heading";
+import { breakpoint } from "../util/device";
 
 const TipLinks = () => {
   return (
@@ -15,17 +16,17 @@ const TipLinks = () => {
         altText={"tip jar icon"}
         caption="Tips are Always Appreciated!"
       />
-      <TipButton>
-        <Link href="https://venmo.com/u/Dan-ODea-1">
+      <Link href="https://venmo.com/u/Dan-ODea-1">
+        <TipButton>
           <img src={venmo} alt="venmo icon" />
           Venmo
-        </Link>
-      </TipButton>
-      <TipButton>
-        <Link href="https://paypal.me/danodeamusic?country.x=US&locale.x=en_US">
+        </TipButton>
+      </Link>
+      <Link href="https://paypal.me/danodeamusic?country.x=US&locale.x=en_US">
+        <TipButton>
           <FontAwesomeIcon icon={faPaypal} /> PayPal
-        </Link>
-      </TipButton>
+        </TipButton>
+      </Link>
     </Container>
   );
 };
@@ -38,8 +39,8 @@ const Container = styled.div`
   padding: 20px 0;
   display: flex;
   flex-direction: column;
-  width: 80vw;
   justify-content: space-between;
+  width: 90vw;
 
   & img {
     height: 20px;
@@ -49,6 +50,10 @@ const Container = styled.div`
     fill: ${link};
     color: ${link};
   }
+
+  ${breakpoint("tablet")} {
+    width: 80vw;
+  }
 `;
 
 const Link = styled.a`
@@ -57,9 +62,9 @@ const Link = styled.a`
 `;
 
 const TipButton = styled.div`
-  border: 3px solid ${link};
+  border: 2px solid ${link};
   border-radius: 25px;
   text-align: center;
-  padding: 20px;
+  padding: 10px 20px;
   margin: 10px 0;
 `;
