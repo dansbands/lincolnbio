@@ -1,18 +1,22 @@
 import styled from "styled-components";
-import theme from "./theme";
 
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
-const SectionHeading = ({ image, altText, caption, icon, isCollapsible, isOpen }) => {
+const SectionHeading = ({
+  renderIcon,
+  caption,
+  icon,
+  isCollapsible,
+  isOpen,
+}) => {
   return (
     <Heading4>
       {isCollapsible && (
         <FontAwesomeIcon icon={faCaretRight} rotation={isOpen && 90} />
       )}
       <Content $isCollapsible={isCollapsible}>
-        {image && <img src={image} alt={altText} />}
+        {renderIcon && renderIcon()}
         {icon && icon()}
         {caption}
       </Content>
@@ -22,12 +26,10 @@ const SectionHeading = ({ image, altText, caption, icon, isCollapsible, isOpen }
 
 export default SectionHeading;
 
-const { divider } = theme;
-
 const Heading4 = styled.h4`
   font-size: 20px;
   padding-bottom: 10px;
-  border-bottom: 1px solid ${divider};
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.divider}`};
 
   & img {
     height: 30px;
@@ -36,5 +38,5 @@ const Heading4 = styled.h4`
 `;
 
 const Content = styled.span`
-  margin-left: ${({ $isCollapsible }) => $isCollapsible ? '10px' : 0};
+  margin-left: ${({ $isCollapsible }) => ($isCollapsible ? "10px" : 0)};
 `;

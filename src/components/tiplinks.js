@@ -1,24 +1,26 @@
-import styled from "styled-components";
-import theme from "./theme";
+import styled, { useTheme } from "styled-components";
 
-import tipjar from "../assets/tipjar2.svg";
-import venmo from "../assets/venmo.svg";
+import { ReactComponent as Tipjar } from "../assets/tipjar2.svg";
+import { ReactComponent as Venmo } from "../assets/venmo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaypal } from "@fortawesome/free-brands-svg-icons";
 import SectionHeading from "./section-heading";
 import { breakpoint } from "../util/device";
 
 const TipLinks = () => {
+  const theme = useTheme();
+
   return (
     <Container>
       <SectionHeading
-        image={tipjar}
-        altText={"tip jar icon"}
+        renderIcon={() => (
+          <Tipjar altText="tip jar icon" fill={theme.colors.primary} />
+        )}
         caption="Tips are Always Appreciated!"
       />
       <Link href="https://venmo.com/u/Dan-ODea-1">
         <TipButton>
-          <img src={venmo} alt="venmo icon" />
+          <Venmo alt="venmo icon" fill={theme.colors.secondary} />
           Venmo
         </TipButton>
       </Link>
@@ -33,8 +35,6 @@ const TipLinks = () => {
 
 export default TipLinks;
 
-const { link } = theme;
-
 const Container = styled.div`
   padding: 20px 0;
   display: flex;
@@ -42,13 +42,11 @@ const Container = styled.div`
   justify-content: space-between;
   width: 90vw;
 
-  & img {
-    height: 20px;
-    width: 20px;
-    margin-right: 10px;
+  & svg {
+    height: 25px;
+    width: 25px;
+    margin-right: 5px;
     margin-bottom: -5px;
-    fill: ${link};
-    color: ${link};
   }
 
   ${breakpoint("tablet")} {
@@ -57,12 +55,12 @@ const Container = styled.div`
 `;
 
 const Link = styled.a`
-  color: ${link};
+  color: ${({ theme }) => theme.colors.secondary};
   text-decoration: none;
 `;
 
 const TipButton = styled.div`
-  border: 2px solid ${link};
+  border: ${({ theme }) => `1px solid ${theme.colors.secondary}`};
   border-radius: 25px;
   text-align: center;
   padding: 10px 20px;

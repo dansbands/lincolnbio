@@ -12,7 +12,6 @@ import {
   faPeopleArrows,
   faHeadphones,
 } from "@fortawesome/free-solid-svg-icons";
-import theme from "./theme";
 import SectionHeading from "./section-heading";
 import { breakpoint } from "../util/device";
 import { useMediaQuery } from "../hooks/useMediaQuery";
@@ -75,8 +74,6 @@ const QuickLinks = () => {
 
 export default QuickLinks;
 
-const { text, link } = theme;
-
 const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -109,12 +106,12 @@ const HorizontalLinks = styled.div`
 `;
 
 const Link = styled.a`
-  color: ${link};
+  color: ${({ theme }) => theme.colors.secondary};
   text-decoration: none;
 `;
 
 const LinkContent = styled.div`
-  border: 1px solid ${link};
+  border: ${({ theme }) => `1px solid ${theme.colors.secondary}`};
   border-radius: 10px;
   padding: 5px;
   display: flex;

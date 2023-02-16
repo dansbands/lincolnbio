@@ -6,26 +6,26 @@
 // Laptop L - 1440px
 // 4K - 2560px
 
-const size = {
-  mobileS: "320px",
-  mobileM: "375px",
-  mobileL: "425px",
-  tablet: "768px",
-  laptop: "1024px",
-  laptopL: "1440px",
-  desktop: "1600px",
-  desktopL: "2560px",
+export const screenSize = {
+  mobileS: 320,
+  mobileM: 375,
+  mobileL: 425,
+  tablet: 768,
+  laptop: 1024,
+  laptopL: 1440,
+  desktop: 1600,
+  desktopL: 2560,
 };
 
 export const device = {
-  mobileS: `(min-width: ${size.mobileS})`,
-  mobileM: `(min-width: ${size.mobileM})`,
-  mobileL: `(min-width: ${size.mobileL})`,
-  tablet: `(min-width: ${size.tablet})`,
-  laptop: `(min-width: ${size.laptop})`,
-  laptopL: `(min-width: ${size.laptopL})`,
-  desktop: `(min-width: ${size.desktop})`,
-  desktopL: `(min-width: ${size.desktopL})`,
+  mobileS: `(min-width: ${screenSize.mobileS}px)`,
+  mobileM: `(min-width: ${screenSize.mobileM}px)`,
+  mobileL: `(min-width: ${screenSize.mobileL}px)`,
+  tablet: `(min-width: ${screenSize.tablet}px)`,
+  laptop: `(min-width: ${screenSize.laptop}px)`,
+  laptopL: `(min-width: ${screenSize.laptopL}px)`,
+  desktop: `(min-width: ${screenSize.desktop}px)`,
+  desktopL: `(min-width: ${screenSize.desktopL}px)`,
 };
 
 export const breakpoint = (chosenDevice) => {

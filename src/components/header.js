@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useMediaQuery } from "../hooks/useMediaQuery.js";
-import theme from "./theme.js";
 
 // @TODO: This could be a split/map situation
 const Header = () => {
@@ -32,11 +31,9 @@ const Header = () => {
 
 export default Header;
 
-const { text, link } = theme;
-
 const Container = styled.div`
   padding: 50px;
-  border-bottom: 1px solid ${text};
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.divider}`};
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -44,9 +41,10 @@ const Container = styled.div`
 
 const HeaderOdd = styled.div`
   letter-spacing: 10px;
-  color: ${link};
+  color: ${({ theme }) => theme.colors.secondary};
 `;
 
 const HeaderEven = styled.div`
   letter-spacing: 10px;
+  color: ${({ theme }) => theme.colors.primary};
 `;
