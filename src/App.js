@@ -6,15 +6,35 @@ import Calendar from "./components/calendar";
 import Bio from "./components/bio";
 import Header from "./components/header";
 import { theme } from "./util/theme";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [isDark, toggleDark] = useState(false);
+  const [colorMode, updateColorMode] = useState("light");
+
+  useEffect(() => {
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (e) =>
+        updateColorMode(e.matches ? "dark" : "light")
+      );
+
+    updateColorMode(
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light"
+    );
+
+    return () => {
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .removeEventListener("change", () => {});
+    };
+  }, []);
 
   return (
-    <ThemeProvider theme={theme[isDark ? 'dark' : 'light']}>
+    <ThemeProvider theme={theme[colorMode]}>
       <Container>
-        <Header toggleDark={toggleDark} />
+        <Header />
         <Body>
           <QuickLinks />
           <TipLinks />
@@ -30,9 +50,8 @@ export default App;
 
 const Container = styled.div`
   font-family: roboto;
-  width: 100%;
-  height: 100vh;
-  background: ${({ theme }) => theme.colors.background};
+  background: ${({ theme }) => theme.colors.background} no-repeat center center;
+  background-size: cover;
   color: ${({ theme }) => theme.colors.primary};
   margin: 0;
   padding: 0;
