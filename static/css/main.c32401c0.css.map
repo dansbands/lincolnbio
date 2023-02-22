@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.c32401c0.css","mappings":"AAAA,UAGE,YAAa,CAFb,QAAS,CACT,SAEF","sources":["index.css"],"sourcesContent":["html, body {\n  margin: 0;\n  padding: 0;\n  height: 200vh;\n}\n"],"names":[],"sourceRoot":""}
