@@ -87,6 +87,7 @@ export default Bio;
 const Container = styled.div`
   cursor: pointer;
   width: 90vw;
+  background: ${({theme}) => theme.colors.background}
 
   ${breakpoint("tablet")} {
     width: 80vw;

@@ -18,7 +18,7 @@ import { useMediaQuery } from "../hooks/useMediaQuery";
 
 const QuickLinks = () => {
   const isMobile = useMediaQuery();
-  const iconSize = isMobile ? "3x" : "6x";
+  const iconSize = isMobile ? "4x" : "6x";
 
   return (
     <Container>
