@@ -9,12 +9,12 @@ const SectionHeading = ({
   icon,
   isCollapsible,
   isOpen,
-  onClick
+  onClick,
 }) => {
   return (
     <Heading4 onClick={onClick}>
       {isCollapsible && (
-        <FontAwesomeIcon icon={faCaretRight} rotation={isOpen && 90} />
+        <FontAwesomeIcon icon={faCaretRight} rotation={isOpen ? 90 : 0} />
       )}
       <Content $isCollapsible={isCollapsible}>
         {renderIcon && renderIcon()}

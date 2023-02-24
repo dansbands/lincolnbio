@@ -10,6 +10,16 @@ import SectionHeading from "./section-heading";
 const Calendar = ({ events }) => {
   const [isOpen, setIsOpen] = useState(true);
 
+  const sortedEvents = events.sort((a, b) => {
+    if (a.start?.dateTime < b.start?.dateTime) {
+      return 1;
+    }
+    if (a.start?.dateTime > b.start?.dateTime) {
+      return -1;
+    }
+    return 0;
+  });
+
   const optionsDate = {
     weekday: "short",
     month: "short",
@@ -30,9 +40,9 @@ const Calendar = ({ events }) => {
       />
       {isOpen && (
         <Content $isOpen={isOpen}>
-          {events.map(({ summary, start }) => {
+          {sortedEvents.map(({ summary, start }) => {
             return (
-              <CalendarRow>
+              <CalendarRow key={start?.dateTime}>
                 <RowSectionLeft>{summary}</RowSectionLeft>
                 <RowSectionRight>
                   {formatDate(start?.dateTime, optionsDate)}

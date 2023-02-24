@@ -1,8 +1,6 @@
 import { gapi } from "gapi-script";
 
 export const getEvents = (calendarID, apiKey, handleEvents) => {
-  console.log("calendarID", calendarID);
-  console.log("apiKey", apiKey);
   function initiate() {
     gapi.client
       .init({
@@ -20,7 +18,6 @@ export const getEvents = (calendarID, apiKey, handleEvents) => {
 
       .then(
         (response) => {
-          console.log("response", response);
           let events = response.result.items;
           handleEvents(events);
         },
