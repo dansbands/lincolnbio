@@ -1,3 +1,5 @@
+import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import styled from "styled-components";
 import { breakpoint } from "../util/device";
@@ -9,13 +11,14 @@ import SectionHeading from "./section-heading";
 // add styles and animations
 const Calendar = ({ events }) => {
   const [isOpen, setIsOpen] = useState(true);
+  const [isSortReversed, setIsSortReversed] = useState(false);
 
   const sortedEvents = events.sort((a, b) => {
     if (a.start?.dateTime < b.start?.dateTime) {
-      return 1;
+      return isSortReversed ? 1 : -1;
     }
     if (a.start?.dateTime > b.start?.dateTime) {
-      return -1;
+      return isSortReversed ? -1 : 1;
     }
     return 0;
   });
@@ -40,6 +43,16 @@ const Calendar = ({ events }) => {
       />
       {isOpen && (
         <Content $isOpen={isOpen}>
+          <SortButton
+            type="button"
+            onClick={() => setIsSortReversed(!isSortReversed)}
+          >
+            <FontAwesomeIcon
+              icon={faCaretRight}
+              size="6x"
+              rotation={isSortReversed ? 90 : 270}
+            />
+          </SortButton>
           {sortedEvents.map(({ summary, start }) => {
             return (
               <CalendarRow key={start?.dateTime}>
@@ -81,4 +94,12 @@ const CalendarRow = styled.div`
 const RowSectionLeft = styled.div``;
 const RowSectionRight = styled.div`
   text-align: right;
+`;
+
+const SortButton = styled.button`
+  background-color: transparent;
+  border: ${({ theme }) => `1px solid ${theme.colors.primary}`};
+  color: ${({ theme }) => theme.colors.primary};
+  padding: 0 30px;
+  border-radius: 30px;
 `;
