@@ -7,9 +7,18 @@ import Bio from "./components/bio";
 import Header from "./components/header";
 import { theme } from "./util/theme";
 import { useEffect, useState } from "react";
+import { getEvents } from "./util/fetch";
 
 function App() {
   const [colorMode, updateColorMode] = useState("light");
+  const [events, setEvents] = useState([]);
+
+  const calendarID = process.env.REACT_APP_CALENDAR_ID;
+  const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
+
+  useEffect(() => {
+    getEvents(calendarID, apiKey, setEvents);
+  }, [apiKey, calendarID]);
 
   useEffect(() => {
     window
@@ -38,7 +47,7 @@ function App() {
         <Body>
           <QuickLinks />
           <TipLinks />
-          <Calendar />
+          <Calendar events={events} />
           <Bio />
         </Body>
       </Container>
