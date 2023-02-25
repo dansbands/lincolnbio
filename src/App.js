@@ -8,6 +8,7 @@ import Header from "./components/header";
 import { theme } from "./util/theme";
 import { useEffect, useState } from "react";
 import { getEvents } from "./util/fetch";
+import { sortEvents } from "./util/helpers";
 
 function App() {
   const [colorMode, updateColorMode] = useState("light");
@@ -17,7 +18,11 @@ function App() {
   const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
 
   useEffect(() => {
-    getEvents(calendarID, apiKey, setEvents);
+    const sortAndSetEvents = (events) => {
+      const sortedEvents = sortEvents(events, true);
+      setEvents(sortedEvents);
+    };
+    getEvents(calendarID, apiKey, sortAndSetEvents);
   }, [apiKey, calendarID]);
 
   useEffect(() => {

@@ -1,9 +1,10 @@
-import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import { faCircleSortUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { breakpoint } from "../util/device";
-import { formatDate } from "../util/helpers";
+import { formatDate, sortEvents } from "../util/helpers";
+import { ReactComponent as SortUp } from "../assets/sortup.svg";
 
 import SectionHeading from "./section-heading";
 
@@ -11,17 +12,11 @@ import SectionHeading from "./section-heading";
 // add styles and animations
 const Calendar = ({ events }) => {
   const [isOpen, setIsOpen] = useState(true);
-  const [isSortReversed, setIsSortReversed] = useState(false);
+  const [isSortReversed, setIsSortReversed] = useState(true);
 
-  const sortedEvents = events.sort((a, b) => {
-    if (a.start?.dateTime < b.start?.dateTime) {
-      return isSortReversed ? 1 : -1;
-    }
-    if (a.start?.dateTime > b.start?.dateTime) {
-      return isSortReversed ? -1 : 1;
-    }
-    return 0;
-  });
+  const theme = useTheme();
+
+  const sortedEvents = sortEvents(events, isSortReversed);
 
   const optionsDate = {
     weekday: "short",
@@ -46,21 +41,26 @@ const Calendar = ({ events }) => {
           <SortButton
             type="button"
             onClick={() => setIsSortReversed(!isSortReversed)}
+            $isSortReversed={isSortReversed}
           >
-            <FontAwesomeIcon
-              icon={faCaretRight}
-              size="6x"
-              rotation={isSortReversed ? 90 : 270}
+            <SortUp
+              alt="tip jar icon"
+              fill={theme.colors.primary}
+              style={{ height: "50px", width: "50px" }}
             />
           </SortButton>
-          {sortedEvents.map(({ summary, start }) => {
+          {sortedEvents.map(({ location, summary, start }, idx) => {
             return (
-              <CalendarRow key={start?.dateTime}>
-                <RowSectionLeft>{summary}</RowSectionLeft>
+              <CalendarRow key={idx}>
+                <RowSectionLeft>
+                  {summary}
+                  <br />
+                  <Location>{location}</Location>
+                </RowSectionLeft>
                 <RowSectionRight>
                   {formatDate(start?.dateTime, optionsDate)}
                   <br />
-                  {formatDate(start?.dateTime, optionsYear)}
+                  <Year>{formatDate(start?.dateTime, optionsYear)}</Year>
                 </RowSectionRight>
               </CalendarRow>
             );
@@ -92,14 +92,28 @@ const CalendarRow = styled.div`
 `;
 
 const RowSectionLeft = styled.div``;
+
+const Location = styled.div`
+  font-size: 10px;
+`;
+
 const RowSectionRight = styled.div`
   text-align: right;
+`;
+
+const Year = styled.div`
+  font-size: 10px;
 `;
 
 const SortButton = styled.button`
   background-color: transparent;
   border: ${({ theme }) => `1px solid ${theme.colors.primary}`};
   color: ${({ theme }) => theme.colors.primary};
-  padding: 0 30px;
+  padding: 30px;
   border-radius: 30px;
+
+  & svg {
+    transform: ${({ $isSortReversed }) =>
+      $isSortReversed ? "rotate(180deg)" : "rotate(0deg)"};
+  }
 `;

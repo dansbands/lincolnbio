@@ -14,7 +14,7 @@ const TipLinks = () => {
     <Container>
       <SectionHeading
         renderIcon={() => (
-          <Tipjar altText="tip jar icon" fill={theme.colors.primary} />
+          <Tipjar alt="tip jar icon" fill={theme.colors.primary} />
         )}
         caption="Tips are Always Appreciated!"
       />
