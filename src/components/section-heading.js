@@ -10,24 +10,31 @@ const SectionHeading = ({
   isCollapsible,
   isOpen,
   onClick,
+  renderSort,
 }) => {
   return (
-    <Heading4 onClick={onClick}>
-      {isCollapsible && (
-        <FontAwesomeIcon icon={faCaretRight} rotation={isOpen ? 90 : 0} />
-      )}
-      <Content $isCollapsible={isCollapsible}>
-        {renderIcon && renderIcon()}
-        {icon && icon()}
-        {caption}
-      </Content>
-    </Heading4>
+    <>
+      <Heading4>
+        <Content $isCollapsible={isCollapsible}>
+          <ContentLeft onClick={onClick}>
+            {isCollapsible && (
+              <StyledFAIcon icon={faCaretRight} rotation={isOpen ? 90 : 0} />
+            )}
+            {renderIcon && renderIcon()}
+            {icon && icon()}
+            {caption}
+          </ContentLeft>
+          <ContentRight>{isOpen && renderSort && renderSort()}</ContentRight>
+        </Content>
+      </Heading4>
+    </>
   );
 };
 
 export default SectionHeading;
 
 const Heading4 = styled.h4`
+  display: flex;
   font-size: 20px;
   padding-bottom: 10px;
   border-bottom: ${({ theme }) => `1px solid ${theme.colors.divider}`};
@@ -38,6 +45,23 @@ const Heading4 = styled.h4`
   }
 `;
 
-const Content = styled.span`
-  margin-left: ${({ $isCollapsible }) => ($isCollapsible ? "10px" : 0)};
+const Content = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const ContentLeft = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+`;
+
+const ContentRight = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
+const StyledFAIcon = styled(FontAwesomeIcon)`
+  margin-right: 10px;
 `;

@@ -24,7 +24,7 @@ const QuickLinks = () => {
     <Container>
       <QuickLinksLeft>
         <SectionHeading
-          icon={() => <FontAwesomeIcon icon={faPeopleArrows} size="lg" />}
+          icon={() => <StyledFAIcon icon={faPeopleArrows} size="lg" />}
           caption=" Connect:"
         />
         <HorizontalLinks>
@@ -50,7 +50,7 @@ const QuickLinks = () => {
       </QuickLinksLeft>
       <QuickLinksRight>
         <SectionHeading
-          icon={() => <FontAwesomeIcon icon={faHeadphones} size="lg" />}
+          icon={() => <StyledFAIcon icon={faHeadphones} size="lg" />}
           caption=" Listen:"
         />
         <HorizontalLinks>
@@ -127,4 +127,8 @@ const LinkContent = styled.div`
     font-size: 16px;
     padding: 10px;
   }
+`;
+
+const StyledFAIcon = styled(FontAwesomeIcon)`
+  margin-right: 10px;
 `;

@@ -66,7 +66,7 @@ const Container = styled.div`
   font-family: roboto;
   background: ${({ theme }) => theme.colors.background} no-repeat center center;
   background-size: cover;
-  height: 300vh;
+  height: 500vh;
   color: ${({ theme }) => theme.colors.primary};
   margin: 0;
   padding: 0;

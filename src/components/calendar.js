@@ -1,5 +1,3 @@
-import { faCircleSortUp } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import styled, { useTheme } from "styled-components";
 import { breakpoint } from "../util/device";
@@ -35,20 +33,24 @@ const Calendar = ({ events }) => {
         isOpen={isOpen}
         isCollapsible
         caption="Calendar"
+        renderSort={() => (
+          <>
+            <div>Sort:</div>
+            <SortButton
+              type="button"
+              onClick={() => setIsSortReversed(!isSortReversed)}
+              $isSortReversed={isSortReversed}
+            >
+              <SortUp
+                alt="sort up icon"
+                fill={theme.colors.primary}
+              />
+            </SortButton>
+          </>
+        )}
       />
       {isOpen && (
         <Content $isOpen={isOpen}>
-          <SortButton
-            type="button"
-            onClick={() => setIsSortReversed(!isSortReversed)}
-            $isSortReversed={isSortReversed}
-          >
-            <SortUp
-              alt="tip jar icon"
-              fill={theme.colors.primary}
-              style={{ height: "50px", width: "50px" }}
-            />
-          </SortButton>
           {sortedEvents.map(({ location, summary, start }, idx) => {
             return (
               <CalendarRow key={idx}>
@@ -74,6 +76,7 @@ const Calendar = ({ events }) => {
 export default Calendar;
 
 const Container = styled.div`
+  background-color: ${({ theme }) => theme.colors.background};
   cursor: pointer;
   width: 90vw;
 
@@ -107,12 +110,14 @@ const Year = styled.div`
 
 const SortButton = styled.button`
   background-color: transparent;
-  border: ${({ theme }) => `1px solid ${theme.colors.primary}`};
+  border: none;
   color: ${({ theme }) => theme.colors.primary};
-  padding: 30px;
-  border-radius: 30px;
+  margin-left: 5px;
 
   & svg {
+    font-size: 10px;
+    height: 25px;
+    width: 25px;
     transform: ${({ $isSortReversed }) =>
       $isSortReversed ? "rotate(180deg)" : "rotate(0deg)"};
   }
