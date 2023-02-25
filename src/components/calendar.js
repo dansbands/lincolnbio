@@ -9,7 +9,7 @@ import SectionHeading from "./section-heading";
 // @TODO: Combine this and Calendar into one ExpandableSection component,
 // add styles and animations
 const Calendar = ({ events }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [isSortReversed, setIsSortReversed] = useState(true);
 
   const theme = useTheme();
