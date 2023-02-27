@@ -51,7 +51,7 @@ const Calendar = ({ events }) => {
       />
       {isOpen && (
         <Content $isOpen={isOpen}>
-          {sortedEvents.map(({ location, summary, start }, idx) => {
+          {sortedEvents.splice(0,50).map(({ location, summary, start }, idx) => {
             return (
               <CalendarRow key={idx}>
                 <RowSectionLeft>
@@ -77,7 +77,6 @@ export default Calendar;
 
 const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
-  cursor: pointer;
   width: 90vw;
 
   ${breakpoint("tablet")} {

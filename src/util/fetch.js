@@ -12,7 +12,7 @@ export const getEvents = (calendarID, apiKey, handleEvents) => {
 
       .then(function () {
         return gapi.client.request({
-          path: `https://www.googleapis.com/calendar/v3/calendars/${calendarID}/events?maxResults=2500&sortorder=descending`,
+          path: `https://www.googleapis.com/calendar/v3/calendars/${calendarID}/events?maxResults=2500&sortorder=descending&singleEvents=true`,
         });
       })
 
