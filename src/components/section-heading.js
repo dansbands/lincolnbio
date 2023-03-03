@@ -11,12 +11,13 @@ const SectionHeading = ({
   isOpen,
   onClick,
   renderSort,
+  renderPagination,
 }) => {
   return (
     <>
       <Heading4>
         <Content $isCollapsible={isCollapsible}>
-          <ContentLeft onClick={onClick}>
+          <ContentLeft onClick={onClick} $renderPagination={renderPagination}>
             {isCollapsible && (
               <StyledFAIcon
                 icon={faCaretRight}
@@ -28,6 +29,7 @@ const SectionHeading = ({
             {icon && icon()}
             {caption}
           </ContentLeft>
+          {isOpen && renderPagination && renderPagination()}
           <ContentRight>{isOpen && renderSort && renderSort()}</ContentRight>
         </Content>
       </Heading4>
@@ -62,15 +64,16 @@ const Content = styled.div`
 `;
 
 const ContentLeft = styled.div`
-  width: 100%;
+  width: ${({ $renderPagination }) => ($renderPagination ? "50%" : "100%")};
   display: flex;
   justify-content: flex-start;
   align-items: center;
 `;
 
 const ContentRight = styled.div`
+  width: 50%;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
 `;
 

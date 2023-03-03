@@ -7,11 +7,17 @@ import { ReactComponent as SortUp } from "../assets/sortup.svg";
 import SectionHeading from "./section-heading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
+import Pagination from "./pagination";
 // @TODO: Combine this and Calendar into one ExpandableSection component,
 // add styles and animations
 const Calendar = ({ events }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSortReversed, setIsSortReversed] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const itemsPerPage = 50;
+  const spliceFromIndex = (currentPage - 1) * itemsPerPage;
+  const totalPages = Math.ceil(events.length / itemsPerPage);
 
   const theme = useTheme();
 
@@ -35,6 +41,13 @@ const Calendar = ({ events }) => {
         isCollapsible
         caption="Calendar"
         icon={() => <StyledFAIcon icon={faCalendarDays} size="lg" />}
+        renderPagination={() => (
+          <Pagination
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            totalPages={totalPages}
+          />
+        )}
         renderSort={() => (
           <>
             <div>Sort:</div>
@@ -51,7 +64,7 @@ const Calendar = ({ events }) => {
       {isOpen && (
         <Content $isOpen={isOpen}>
           {sortedEvents
-            .splice(0, 50)
+            .splice(spliceFromIndex, itemsPerPage)
             .map(({ location, summary, start }, idx) => {
               return (
                 <CalendarRow key={idx}>
