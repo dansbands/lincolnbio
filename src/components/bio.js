@@ -3,15 +3,22 @@ import styled from "styled-components";
 import { breakpoint } from "../util/device";
 
 import SectionHeading from "./section-heading";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 // @TODO: Combine this and Calendar into one ExpandableSection component,
 // add styles and animations
 const Bio = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Container onClick={() => setIsOpen(!isOpen)}>
-      <SectionHeading isOpen={isOpen} isCollapsible caption="Bio" />
+    <Container>
+      <SectionHeading
+        onClick={() => setIsOpen(!isOpen)}
+        isOpen={isOpen}
+        isCollapsible
+        caption="Bio"
+        icon={() => <StyledFAIcon icon={faUser} size="lg" />}
+      />
       {isOpen && (
         <Content $isOpen={isOpen}>
           <h2>Dan O'Dea</h2>
@@ -85,9 +92,8 @@ const Bio = () => {
 export default Bio;
 
 const Container = styled.div`
-  cursor: pointer;
+  background: ${({ theme }) => theme.colors.background};
   width: 90vw;
-  background: ${({theme}) => theme.colors.background}
 
   ${breakpoint("tablet")} {
     width: 80vw;
@@ -95,3 +101,7 @@ const Container = styled.div`
 `;
 
 const Content = styled.div``;
+
+const StyledFAIcon = styled(FontAwesomeIcon)`
+  margin-right: 10px;
+`;

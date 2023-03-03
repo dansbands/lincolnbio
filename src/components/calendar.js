@@ -5,7 +5,8 @@ import { formatDate, sortEvents } from "../util/helpers";
 import { ReactComponent as SortUp } from "../assets/sortup.svg";
 
 import SectionHeading from "./section-heading";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 // @TODO: Combine this and Calendar into one ExpandableSection component,
 // add styles and animations
 const Calendar = ({ events }) => {
@@ -33,6 +34,7 @@ const Calendar = ({ events }) => {
         isOpen={isOpen}
         isCollapsible
         caption="Calendar"
+        icon={() => <StyledFAIcon icon={faCalendarDays} size="lg" />}
         renderSort={() => (
           <>
             <div>Sort:</div>
@@ -41,32 +43,31 @@ const Calendar = ({ events }) => {
               onClick={() => setIsSortReversed(!isSortReversed)}
               $isSortReversed={isSortReversed}
             >
-              <SortUp
-                alt="sort up icon"
-                fill={theme.colors.primary}
-              />
+              <SortUp alt="sort up icon" fill={theme.colors.primary} />
             </SortButton>
           </>
         )}
       />
       {isOpen && (
         <Content $isOpen={isOpen}>
-          {sortedEvents.splice(0,50).map(({ location, summary, start }, idx) => {
-            return (
-              <CalendarRow key={idx}>
-                <RowSectionLeft>
-                  {summary}
-                  <br />
-                  <Location>{location}</Location>
-                </RowSectionLeft>
-                <RowSectionRight>
-                  {formatDate(start?.dateTime, optionsDate)}
-                  <br />
-                  <Year>{formatDate(start?.dateTime, optionsYear)}</Year>
-                </RowSectionRight>
-              </CalendarRow>
-            );
-          })}
+          {sortedEvents
+            .splice(0, 50)
+            .map(({ location, summary, start }, idx) => {
+              return (
+                <CalendarRow key={idx}>
+                  <RowSectionLeft>
+                    {summary}
+                    <br />
+                    <Location>{location}</Location>
+                  </RowSectionLeft>
+                  <RowSectionRight>
+                    {formatDate(start?.dateTime, optionsDate)}
+                    <br />
+                    <Year>{formatDate(start?.dateTime, optionsYear)}</Year>
+                  </RowSectionRight>
+                </CalendarRow>
+              );
+            })}
         </Content>
       )}
     </Container>
@@ -120,4 +121,8 @@ const SortButton = styled.button`
     transform: ${({ $isSortReversed }) =>
       $isSortReversed ? "rotate(180deg)" : "rotate(0deg)"};
   }
+`;
+
+const StyledFAIcon = styled(FontAwesomeIcon)`
+  margin-right: 10px;
 `;

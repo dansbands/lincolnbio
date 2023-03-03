@@ -14,7 +14,7 @@ const TipLinks = () => {
     <Container>
       <SectionHeading
         renderIcon={() => (
-          <Tipjar alt="tip jar icon" fill={theme.colors.primary} />
+          <StyledTipJar alt="tip jar icon" fill={theme.colors.primary} />
         )}
         caption="Tips are Always Appreciated!"
       />
@@ -26,7 +26,7 @@ const TipLinks = () => {
       </Link>
       <Link href="https://paypal.me/danodeamusic?country.x=US&locale.x=en_US">
         <TipButton>
-          <FontAwesomeIcon icon={faPaypal} /> PayPal
+          <FontAwesomeIcon icon={faPaypal} />PayPal
         </TipButton>
       </Link>
     </Container>
@@ -42,21 +42,28 @@ const Container = styled.div`
   justify-content: space-between;
   width: 90vw;
 
-  & svg {
-    height: 25px;
-    width: 25px;
-    margin-right: 5px;
-    margin-bottom: -5px;
-  }
-
   ${breakpoint("tablet")} {
     width: 80vw;
   }
 `;
 
+const StyledTipJar = styled(Tipjar)`
+  margin: 5px;
+  height: 25px;
+  width: 25px;
+`;
+
 const Link = styled.a`
   color: ${({ theme }) => theme.colors.secondary};
   text-decoration: none;
+  font-size: 20px;
+
+  & svg {
+    height: 25px;
+    width: 25px;
+    margin-right: 10px;
+    margin-bottom: -5px;
+  }
 `;
 
 const TipButton = styled.div`
