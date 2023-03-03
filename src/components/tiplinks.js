@@ -16,7 +16,7 @@ const TipLinks = () => {
         renderIcon={() => (
           <StyledTipJar alt="tip jar icon" fill={theme.colors.primary} />
         )}
-        caption="Tips are Always Appreciated!"
+        caption={<span>Tips are Always Appreciated!</span>}
       />
       <Link href="https://venmo.com/u/Dan-ODea-1">
         <TipButton>
@@ -26,7 +26,8 @@ const TipLinks = () => {
       </Link>
       <Link href="https://paypal.me/danodeamusic?country.x=US&locale.x=en_US">
         <TipButton>
-          <FontAwesomeIcon icon={faPaypal} />PayPal
+          <FontAwesomeIcon icon={faPaypal} />
+          PayPal
         </TipButton>
       </Link>
     </Container>

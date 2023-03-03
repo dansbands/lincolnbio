@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { screenSize } from "../util/device";
 
 const SectionHeading = ({
   renderIcon,
@@ -13,6 +14,9 @@ const SectionHeading = ({
   renderSort,
   renderPagination,
 }) => {
+  const isMedium = window.innerWidth >= screenSize.tablet;
+  const shouldRenderCaption = isMedium || !isOpen || !renderPagination;
+
   return (
     <>
       <Heading4>
@@ -27,10 +31,10 @@ const SectionHeading = ({
             )}
             {renderIcon && renderIcon()}
             {icon && icon()}
-            {caption}
+            {shouldRenderCaption && caption}
           </ContentLeft>
           {isOpen && renderPagination && renderPagination()}
-          <ContentRight>{isOpen && renderSort && renderSort()}</ContentRight>
+          {isOpen && renderSort && <ContentRight>{renderSort()}</ContentRight>}
         </Content>
       </Heading4>
     </>
