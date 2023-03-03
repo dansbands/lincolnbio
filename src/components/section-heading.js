@@ -68,14 +68,14 @@ const Content = styled.div`
 `;
 
 const ContentLeft = styled.div`
-  width: ${({ $renderPagination }) => ($renderPagination ? "50%" : "100%")};
+  width: ${({ $renderPagination }) => ($renderPagination ? "33%" : "100%")};
   display: flex;
   justify-content: flex-start;
   align-items: center;
 `;
 
 const ContentRight = styled.div`
-  width: 50%;
+  width: 33%;
   display: flex;
   justify-content: flex-end;
   align-items: center;

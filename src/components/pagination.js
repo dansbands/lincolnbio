@@ -41,6 +41,8 @@ const Pagination = ({ currentPage, setCurrentPage, totalPages }) => {
 export default Pagination;
 
 const PaginationButton = styled.button`
+  font-size: 16px;
+  cursor: pointer;
   border: none;
   background-color: transparent;
   border-bottom: ${({ $active, theme }) =>

@@ -1,13 +1,15 @@
 import { useState } from "react";
 import styled, { useTheme } from "styled-components";
 import { breakpoint } from "../util/device";
-import { formatDate, sortEvents } from "../util/helpers";
+import { sortEvents } from "../util/helpers";
 import { ReactComponent as SortUp } from "../assets/sortup.svg";
 
 import SectionHeading from "./section-heading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import Pagination from "./pagination";
+import CalendarRow from "./calendarRow";
+
 // @TODO: Combine this and Calendar into one ExpandableSection component,
 // add styles and animations
 const Calendar = ({ events }) => {
@@ -22,16 +24,6 @@ const Calendar = ({ events }) => {
   const theme = useTheme();
 
   const sortedEvents = sortEvents(events, isSortReversed);
-
-  const optionsDate = {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
-  };
-
-  const optionsYear = {
-    year: "numeric",
-  };
 
   return (
     <Container>
@@ -50,12 +42,12 @@ const Calendar = ({ events }) => {
         )}
         renderSort={() => (
           <>
-            <div>Sort:</div>
             <SortButton
               type="button"
               onClick={() => setIsSortReversed(!isSortReversed)}
               $isSortReversed={isSortReversed}
             >
+              <div>Sort:</div>
               <SortUp alt="sort up icon" fill={theme.colors.primary} />
             </SortButton>
           </>
@@ -65,39 +57,14 @@ const Calendar = ({ events }) => {
         <Content $isOpen={isOpen}>
           {sortedEvents
             .splice(spliceFromIndex, itemsPerPage)
-            .map(({ location, summary, start }, idx) => {
-              return (
-                <CalendarRow key={idx}>
-                  <RowSectionLeft>
-                    {summary}
-                    <br />
-                    <Location>
-                      {location} - <span> Map: </span>
-                      <CalendarLink
-                        href={`https://maps.google.com/maps?q=${location}`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Google
-                      </CalendarLink>
-                      <span> | </span>
-                      <CalendarLink
-                        href={`https://maps.apple.com/maps?q=${location}`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Apple
-                      </CalendarLink>
-                    </Location>
-                  </RowSectionLeft>
-                  <RowSectionRight>
-                    {formatDate(start?.dateTime, optionsDate)}
-                    <br />
-                    <Year>{formatDate(start?.dateTime, optionsYear)}</Year>
-                  </RowSectionRight>
-                </CalendarRow>
-              );
-            })}
+            .map(({ location, summary, start }, idx) => (
+              <CalendarRow
+                key={idx}
+                location={location}
+                summary={summary}
+                start={start}
+              />
+            ))}
         </Content>
       )}
     </Container>
@@ -117,33 +84,12 @@ const Container = styled.div`
 
 const Content = styled.div``;
 
-const CalendarRow = styled.div`
-  padding: 10px 0;
-  border-bottom: ${({ theme }) => `1px solid ${theme.colors.divider}`};
-  display: flex;
-  justify-content: space-between;
-`;
-
-const CalendarLink = styled.a``;
-
-const RowSectionLeft = styled.div``;
-
-const Location = styled.div`
-  font-size: 10px;
-`;
-
-const RowSectionRight = styled.div`
-  text-align: right;
-`;
-
-const Year = styled.div`
-  font-size: 10px;
-`;
-
 const SortButton = styled.button`
+  display: flex;
   background-color: transparent;
   border: none;
   color: ${({ theme }) => theme.colors.primary};
+  font-size: 20px;
   margin-left: 5px;
 
   & svg {

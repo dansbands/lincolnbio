@@ -5,6 +5,7 @@ import TipLinks from "./components/tiplinks";
 import Calendar from "./components/calendar";
 import Bio from "./components/bio";
 import Header from "./components/header";
+import BackToTop from "./components/backToTop";
 import { theme } from "./util/theme";
 import { useEffect, useState } from "react";
 import { getEvents } from "./util/fetch";
@@ -55,6 +56,7 @@ function App() {
           <Calendar events={events} />
           <Bio />
         </Body>
+        <BackToTop />
       </Container>
     </ThemeProvider>
   );
@@ -72,7 +74,7 @@ const Container = styled.div`
   padding: 0;
 
   & a {
-    color: ${({ theme }) => theme.colors.secondary}
+    color: ${({ theme }) => theme.colors.secondary};
   }
 `;
 
