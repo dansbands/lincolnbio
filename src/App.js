@@ -70,6 +70,10 @@ const Container = styled.div`
   color: ${({ theme }) => theme.colors.primary};
   margin: 0;
   padding: 0;
+
+  & a {
+    color: ${({ theme }) => theme.colors.secondary}
+  }
 `;
 
 const Body = styled.div`

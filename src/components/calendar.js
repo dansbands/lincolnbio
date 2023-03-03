@@ -71,7 +71,24 @@ const Calendar = ({ events }) => {
                   <RowSectionLeft>
                     {summary}
                     <br />
-                    <Location>{location}</Location>
+                    <Location>
+                      {location} - <span> Map: </span>
+                      <CalendarLink
+                        href={`https://maps.google.com/maps?q=${location}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Google
+                      </CalendarLink>
+                      <span> | </span>
+                      <CalendarLink
+                        href={`https://maps.apple.com/maps?q=${location}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Apple
+                      </CalendarLink>
+                    </Location>
                   </RowSectionLeft>
                   <RowSectionRight>
                     {formatDate(start?.dateTime, optionsDate)}
@@ -106,6 +123,8 @@ const CalendarRow = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+const CalendarLink = styled.a``;
 
 const RowSectionLeft = styled.div``;
 
