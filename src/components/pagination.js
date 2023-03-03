@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { faBackward, faForward } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Pagination = ({ currentPage, setCurrentPage, totalPages }) => {
   const buttonArr = [];
@@ -19,13 +21,13 @@ const Pagination = ({ currentPage, setCurrentPage, totalPages }) => {
 
   const BackButton = () => (
     <PaginationButton value onClick={() => setCurrentPage(currentPage - 1)}>
-      &laquo;
+      <FontAwesomeIcon icon={faBackward} size="xl" />
     </PaginationButton>
   );
-
+  
   const ForwardButton = () => (
     <PaginationButton onClick={() => setCurrentPage(currentPage + 1)}>
-      &raquo;
+      <FontAwesomeIcon icon={faForward} size="xl" />
     </PaginationButton>
   );
 
@@ -41,7 +43,7 @@ const Pagination = ({ currentPage, setCurrentPage, totalPages }) => {
 export default Pagination;
 
 const PaginationButton = styled.button`
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
   border: none;
   background-color: transparent;

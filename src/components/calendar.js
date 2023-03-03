@@ -91,6 +91,7 @@ const SortButton = styled.button`
   color: ${({ theme }) => theme.colors.primary};
   font-size: 20px;
   margin-left: 5px;
+  padding-right: 0;
 
   & svg {
     font-size: 10px;

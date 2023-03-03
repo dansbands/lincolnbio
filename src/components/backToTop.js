@@ -41,7 +41,7 @@ const BackButton = styled.button`
   position: fixed;
   right: 25px;
   bottom: 50px;
-  padding: 10px 20px;
+  padding: 20px 30px;
   background-color: ${({ theme }) => theme.colors.secondary};
   border: ${({ theme }) => `1px solid ${theme.colors.background}`};
   border-radius: 10px;
