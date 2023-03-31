@@ -92,6 +92,7 @@ const SortButton = styled.button`
   font-size: 20px;
   margin-left: 5px;
   padding-right: 0;
+  cursor: pointer;
 
   & svg {
     font-size: 10px;
