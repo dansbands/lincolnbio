@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled, { useTheme } from "styled-components";
 import { breakpoint } from "../util/device";
 import { sortEvents } from "../util/helpers";
@@ -7,15 +7,18 @@ import { ReactComponent as SortUp } from "../assets/sortup.svg";
 import SectionHeading from "./section-heading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
-import Pagination from "./pagination";
+import MonthlyPagination from "./monthly-pagination";
 import CalendarRow from "./calendarRow";
+import loader from "../assets/loading-fiddle.gif";
 
 // @TODO: Combine this and Calendar into one ExpandableSection component,
 // add styles and animations
 const Calendar = ({ events }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isSortReversed, setIsSortReversed] = useState(true);
+  const [isSortReversed, setIsSortReversed] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [filteredEvents, setFilteredEvents] = useState(null);
+  const [shouldShowLoader, setShouldShowLoader] = useState(true);
 
   const itemsPerPage = 50;
   const spliceFromIndex = (currentPage - 1) * itemsPerPage;
@@ -23,7 +26,15 @@ const Calendar = ({ events }) => {
 
   const theme = useTheme();
 
-  const sortedEvents = sortEvents(events, isSortReversed);
+  const sortedEvents = sortEvents(filteredEvents || events, isSortReversed);
+
+  useEffect(() => {
+    if (events?.length) {
+      setTimeout(() => {
+        setShouldShowLoader(filteredEvents?.length);
+      }, 1000);
+    }
+  }, [events, filteredEvents]);
 
   return (
     <Container>
@@ -34,10 +45,10 @@ const Calendar = ({ events }) => {
         caption="Calendar"
         icon={() => <StyledFAIcon icon={faCalendarDays} size="lg" />}
         renderPagination={() => (
-          <Pagination
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            totalPages={totalPages}
+          <MonthlyPagination
+            events={events}
+            filteredEvents={filteredEvents}
+            setFilteredEvents={setFilteredEvents}
           />
         )}
         renderSort={() => (
@@ -55,16 +66,20 @@ const Calendar = ({ events }) => {
       />
       {isOpen && (
         <Content $isOpen={isOpen}>
-          {sortedEvents
-            .splice(spliceFromIndex, itemsPerPage)
-            .map(({ location, summary, start }, idx) => (
-              <CalendarRow
-                key={idx}
-                location={location}
-                summary={summary}
-                start={start}
-              />
-            ))}
+          {shouldShowLoader ? (
+            sortedEvents
+              .splice(spliceFromIndex, itemsPerPage)
+              .map(({ location, summary, start }, idx) => (
+                <CalendarRow
+                  key={idx}
+                  location={location}
+                  summary={summary}
+                  start={start}
+                />
+              ))
+          ) : (
+            <img src={loader} alt="fiddle loading icon"></img>
+          )}
         </Content>
       )}
     </Container>
@@ -82,7 +97,15 @@ const Container = styled.div`
   }
 `;
 
-const Content = styled.div``;
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  & img {
+    width: 250px;
+    margin: 0 auto;
+  }
+`;
 
 const SortButton = styled.button`
   display: flex;
