@@ -29,6 +29,7 @@ const Calendar = ({ events }) => {
   const sortedEvents = sortEvents(filteredEvents || events, isSortReversed);
 
   useEffect(() => {
+    // @TODO: This breaks when there are no events, like in 2024
     if (events?.length) {
       setTimeout(() => {
         setShouldShowLoader(filteredEvents?.length);

@@ -10,7 +10,7 @@ const MonthlyPagination = ({ events, filteredEvents, setFilteredEvents }) => {
   const todaysDate = new Date();
   const [selectedDate, setSelectedDate] = useState(todaysDate);
 
-  const options = { month: "long", year: "2-digit" };
+  const options = { month: "long", year: "numeric" };
   const currentMonth = new Intl.DateTimeFormat("en-US", options).format(
     selectedDate
   );
@@ -76,6 +76,6 @@ const Button = styled.button`
 `;
 
 const Month = styled.div`
-  min-width: 125px;
+  min-width: 147px;
   text-align: center;
 `;
