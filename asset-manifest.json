@@ -1,18 +1,19 @@
 {
   "files": {
     "main.css": "/lincolnbio/static/css/main.c32401c0.css",
-    "main.js": "/lincolnbio/static/js/main.f2d5771e.js",
+    "main.js": "/lincolnbio/static/js/main.543ce653.js",
     "static/js/787.3f0d1b78.chunk.js": "/lincolnbio/static/js/787.3f0d1b78.chunk.js",
+    "static/media/loading-fiddle.gif": "/lincolnbio/static/media/loading-fiddle.b4172c9d168ac5f10c2b.gif",
     "static/media/tipjar2.svg": "/lincolnbio/static/media/tipjar2.322232e4b5e10fae7e7bf9061b8cb2b9.svg",
     "static/media/sortup.svg": "/lincolnbio/static/media/sortup.ef345d57519b4ed6623269cc5c7c55e2.svg",
     "index.html": "/lincolnbio/index.html",
     "static/media/venmo.svg": "/lincolnbio/static/media/venmo.4d91d843ebf0771860820ff05831ba4d.svg",
     "main.c32401c0.css.map": "/lincolnbio/static/css/main.c32401c0.css.map",
-    "main.f2d5771e.js.map": "/lincolnbio/static/js/main.f2d5771e.js.map",
+    "main.543ce653.js.map": "/lincolnbio/static/js/main.543ce653.js.map",
     "787.3f0d1b78.chunk.js.map": "/lincolnbio/static/js/787.3f0d1b78.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c32401c0.css",
-    "static/js/main.f2d5771e.js"
+    "static/js/main.543ce653.js"
   ]
 }
