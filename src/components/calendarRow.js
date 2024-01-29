@@ -1,16 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { formatDate } from "../util/helpers";
+import { formatDate, formatTime } from "../util/helpers";
 
 const CalendarRow = ({ key, location, summary, start }) => {
   const optionsDate = {
     weekday: "short",
     month: "short",
     day: "numeric",
-  };
-
-  const optionsYear = {
-    year: "numeric",
   };
 
   return (
@@ -42,7 +38,7 @@ const CalendarRow = ({ key, location, summary, start }) => {
       <RowSectionRight>
         {formatDate(start?.dateTime, optionsDate)}
         <br />
-        <Year>{formatDate(start?.dateTime, optionsYear)}</Year>
+        <Year>{formatTime(start?.dateTime)}</Year>
       </RowSectionRight>
     </Container>
   );

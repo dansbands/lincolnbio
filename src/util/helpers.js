@@ -1,13 +1,24 @@
-const defaultOptions = {
+const defaultDateOptions = {
   weekday: "short",
   year: "numeric",
   month: "long",
   day: "numeric",
 };
 
-export const formatDate = (date, options = defaultOptions) => {
-  const dateString = new Date(date)?.toLocaleDateString("en-US", options);
+const defaultTimeOptions = {
+  timeStyle: "short",
+};
+
+export const formatDate = (date, options = defaultDateOptions) => {
+  const newDateObj = new Date(date);
+  const dateString = newDateObj?.toLocaleDateString("en-US", options);
   return dateString;
+};
+
+export const formatTime = (date, options = defaultTimeOptions) => {
+  const newDateObj = new Date(date);
+  const timeString = newDateObj?.toLocaleTimeString("en-US", options);
+  return timeString;
 };
 
 export const sortEvents = (events, isReversed) => {
